@@ -14,10 +14,26 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 client.connect(err => {
   const collection = client.db("burjdb").collection("burjbdc");
-  
+
   //get data -
+  app.get('/user', (req, res)=>{
+    collection.find({})
+    .toArray((err, result)=>{
+      res.send(result);
+    })
+  })
 
   //post data - 
+  app.post("/allInfo",(req,res)=>{
+    const product = req.body;
+    // console.log(product);
+    collection.insertOne(product)
+    .then(data=>{
+      res.send(data.insertedCount>0);
+    //   res.redirect('/')
+    //   console.log(data);
+    })
+  })
 
   //update data - 
 
