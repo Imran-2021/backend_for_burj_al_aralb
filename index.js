@@ -17,6 +17,7 @@ client.connect(err => {
 
   //get data -
   app.get('/user', (req, res)=>{
+    console.log(req.headers.authorization);
     collection.find({email:req.query.email})
     .toArray((err, result)=>{
       res.send(result);
