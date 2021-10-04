@@ -17,7 +17,7 @@ client.connect(err => {
 
   //get data -
   app.get('/user', (req, res)=>{
-    collection.find({})
+    collection.find({email:req.query.email})
     .toArray((err, result)=>{
       res.send(result);
     })
@@ -49,56 +49,3 @@ app.get("/",(req,res)=>{
 app.listen(3002,()=>{
     console.log("done !!");
 })
-
-
-//get data --- 
-//   app.get('/products', (req, res)=>{
-//     collection.find({})
-//     .toArray((err, result)=>{
-//       res.send(result);
-//     })
-//   })
-//   // perform actions on the collection object
-
-//   //post ---- 
-//   app.post('/addProduct',(req, res)=>{
-//     const product = req.body;
-//     // console.log(product);
-//     collection.insertOne(product)
-//     .then(data=>{
-//       // res.send("data added")
-//       res.redirect('/')
-//       console.log(data);
-//     })
-//   })
-
-//   app.get("/product/:id", (req, res)=>{
-//     collection.find({_id: ObjectId(req.params.id)})
-//     .toArray((err, result)=>{
-//       res.send(result[0]);
-//     })
-//   })
-
-//   app.patch('/update/:id', (req, res)=>{
-//     let price =req.body.price;
-//     let quantity =req.body.quantity;
-//     collection.updateOne({_id: ObjectId(req.params.id)},
-//     {
-//       $set: { price:price,quantity:quantity },
-//       $currentDate: { "lastModified": true }
-//     }
-    
-//     )
-//     .then(result=>{
-//       res.send(result.modifiedCount>0)
-//     })
-
-//   })
-
-//   app.delete("/delete/:id",(req,res)=>{
-//     // console.log(req.params.id);
-//     collection.deleteOne({_id: ObjectId(req.params.id)})
-//     .then((result)=>{
-//       res.send(result.deletedCount>0)
-//     })
-//   })
